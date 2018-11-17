@@ -2,7 +2,7 @@ public class Field {
     private String color;
 
     public Field() {
-        this.color = null;
+        this.color = "none";
     }
 
     public void setColor(String color) {
