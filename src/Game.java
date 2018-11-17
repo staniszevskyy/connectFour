@@ -20,8 +20,10 @@ public class Game {
             }
             board.insertToken(column, playerID);
             System.out.println(board);
-            if (board.checkIfGameEnds())
+            if (board.checkIfGameEnds()) {
                 System.out.println("Koniec gry . Wygral gracz : " + playerID);
+                break;
+            }
             else
             {
                int zmienna = (playerID == 1) ? 2 : 1;

@@ -17,11 +17,11 @@ public class GameBoard {
     }
 
     public Boolean checkVertical(){
-        int i = 1;
-        for (int j=0; j< gameBoard[i-1].length; j++){ // 7
+
+        for (int j=0; j< m; j++){ // 7
             int count = 0;
 
-            for (i=1; i<gameBoard.length; i++){ // 6
+            for (int i=1; i<n; i++){ // 6
                 String tempColor = gameBoard[i-1][j].getColor();
                 if (tempColor.equals(gameBoard[i][j].getColor()) && !tempColor.equals("none"))
                     count++;
@@ -37,9 +37,10 @@ public class GameBoard {
 
 
     public Boolean checkHorizontal(){
-        for (int j=0; j< gameBoard.length; j++){
+
+        for (int j=0; j< n; j++){
             int count = 0;
-            for (int i=1 ; i< gameBoard[j].length; i++){
+            for (int i=1 ; i< m; i++){
                String tempColor = gameBoard[j][i-1].getColor();
                if (tempColor.equals(gameBoard[j][i].getColor()) && !tempColor.equals("none"))
                    count ++;
@@ -53,8 +54,32 @@ public class GameBoard {
         return false;
     }
 
+    public Boolean checkDiagonal(){
+        for (int i= 0; i < n - 3 ; i++){
+            for (int j = 0 ; j < m-3; j++){
+                if (gameBoard[i][j].getColor().equals(gameBoard[i+1][j+1].getColor()) &&
+                        gameBoard[i+1][j+1].getColor().equals(gameBoard[i+2][j+2].getColor()) &&
+                        gameBoard[i+2][j+2].getColor().equals(gameBoard[i+3][j+3].getColor()) &&
+                        !gameBoard[i][j].getColor().equals("none"))
+                    return true;
+            }
+        }
+
+        for (int i= 0; i < n-3 ; i++){
+            for (int j = m - 1 ; j > 2; j--){
+                if (gameBoard[i][j].getColor().equals(gameBoard[i+1][j-1].getColor()) &&
+                        gameBoard[i+1][j-1].getColor().equals(gameBoard[i+2][j-2].getColor()) &&
+                               gameBoard[i+2][j-2].getColor().equals(gameBoard[i+3][j-3].getColor()) &&
+                                       !gameBoard[i][j].getColor().equals("none"))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
     public Boolean checkIfGameEnds(){
-        if (checkHorizontal() || checkVertical())
+        if (checkHorizontal() || checkVertical() || checkDiagonal())
             return true;
         return false;
     }
@@ -70,9 +95,9 @@ public class GameBoard {
         for (int row = gameBoard.length-1; row>=0; row--){
             if (gameBoard[row][colNum].getColor().equals("none")) {
                 if (playerID == 1)
-                    gameBoard[row][colNum].setColor("red");
+                    gameBoard[row][colNum].setColor("rede");
                 else
-                    gameBoard[row][colNum].setColor("blu");
+                    gameBoard[row][colNum].setColor("bluu");
                 break;
             }
         }
